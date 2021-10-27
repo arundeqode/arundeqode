@@ -6,7 +6,8 @@ ActiveAdmin.register Product do
     before_action :get_product, only: [:active]
 
     def active
-      @product.update(active:true) 
+      @product.update(active: params[:active]) 
+      flash[:notice] = 'Successfully changed the status.'
       respond_to do |format|
         format.html { redirect_to request.referer}
       end
@@ -26,7 +27,9 @@ ActiveAdmin.register Product do
     column :description
     column :price
     column :stock_qty
-    column :active
+    column :active do |product|
+      render partial: 'products/active' , :locals => {:product => product}
+    end
     column :created_at
     actions
   end

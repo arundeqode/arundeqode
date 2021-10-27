@@ -1,0 +1,7 @@
+<%= form_for(product, model_name: Product, url: active_admin_product_url(product)) do |f| %>
+	<div class="field">
+		<%= f.hidden_field :id, id: 'product_id' %> <br />
+    <%= f.check_box :active, remote: true, id: 'active' %> <br />
+  </div>
+<% end %>
+
