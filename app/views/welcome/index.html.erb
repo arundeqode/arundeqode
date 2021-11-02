@@ -1,9 +1,19 @@
-<h1>Hello, Rails!</h1>
-<% if user_signed_in? %>
-  Logged in as <strong><%= current_user.email %></strong>.
-  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-<% else %>
-  <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-<% end %>
+<%= render "welcome/nav" %>
+<div class="container mt-5">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <% @products.each do |product| %>
+      <div class="col">
+        <div class="card">
+          <%= image_tag product.images.first.image, class: "card-img-top" %>
+          <div class="card-body">
+            <h5 class="card-title"><%= product.name %></h5>
+            <p class="card-text"><%= product.description %></p>
+            <p class="card-text"><b>Price:</b><%= product.price %> 
+              <%= link_to "Buy", carts_path(product_id: product, qty: 1,  authenticity_token: form_authenticity_token), :method => :post %>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

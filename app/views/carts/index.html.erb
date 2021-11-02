@@ -1,0 +1,19 @@
+<%= render "welcome/nav" %>
+<% @carts.each do |cart| %>
+  <div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <%= image_tag cart.product.images.first.image, class: "img-fluid rounded-start" %>
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title"><%= cart.product.name %></h5>
+          <p class="card-text"><b>Price: </b><%= cart.product.price %></p>
+          <p class="card-text"><b>qty: </b><%= cart.qty %></p>
+          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          <%= link_to "Buy", orders_path(cart_ids: [cart.id], qty: cart.qty,  authenticity_token: form_authenticity_token), :method => :post %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
