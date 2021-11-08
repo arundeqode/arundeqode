@@ -10,6 +10,6 @@ class Product < ApplicationRecord
   private
 
   def send_email
-    SendEmailWorker.perform_async
+    # SendEmailWorker.perform_async
   end
 end
